@@ -3,6 +3,8 @@ import {loginHeader} from "../helpers";
 
 export const userService = {
     login,
+    register,
+    forgotPassword
 };
 
 function login(email, password) {
@@ -22,16 +24,56 @@ function login(email, password) {
             if (!response.ok) {
                 return Promise.reject(response.statusText);
             }
-
             return response.json();
         })
         .then(user => {
-            // login successful if there's a jwt token in the response
             if (user && user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem(userAuthConstants.LOCAL_STORAGE_USER_KEY, JSON.stringify(user));
             }
-
             return user;
+        });
+}
+
+function register(fullName, email, password) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({fullName, email: email, password})
+    };
+
+    return fetch('/users', requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                return Promise.reject(response.statusText);
+            }
+            return response.json();
+        })
+        .then(user => {
+            if (user && user.token) {
+                localStorage.setItem(userAuthConstants.LOCAL_STORAGE_USER_KEY, JSON.stringify(user));
+            }
+            return user;
+        });
+};
+
+function forgotPassword(email) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({email})
+    };
+
+    return fetch('/auth/forgot-password', requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                return Promise.reject(response.statusText);
+            }
+            return response.json();
         });
 }

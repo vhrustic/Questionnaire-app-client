@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Col, ControlLabel, FormControl, FormGroup} from 'react-bootstrap'
 import {userActions} from "../store/actions/";
+import {Link} from "react-router-dom";
 
 
-class Register extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
 
@@ -14,7 +15,6 @@ class Register extends Component {
         this.state = {
             email: '',
             password: '',
-            confirmPassword: '',
             submitted: false
         };
 
@@ -31,7 +31,7 @@ class Register extends Component {
         e.preventDefault();
 
         this.setState({submitted: true});
-        const {email, password, confirmPassword} = this.state;
+        const {email, password} = this.state;
         const {dispatch} = this.props;
         if (email && password) {
             dispatch(userActions.login(email, password));
@@ -40,10 +40,10 @@ class Register extends Component {
 
     render() {
         const {loggingIn} = this.props;
-        const {email, password, confirmPassword, submitted} = this.state;
+        const {email, password, submitted} = this.state;
         return (
             <Col md={6} mdOffset={3}>
-                <h2>Register</h2>
+                <h2>Login</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <FormGroup controlId="formEmail">
                         <ControlLabel>Email</ControlLabel>
@@ -55,14 +55,9 @@ class Register extends Component {
                         <FormControl type="password" name="password" value={password} onChange={this.handleChange}/>
                     </FormGroup>
 
-                    <FormGroup controlId="formConfirmPassword">
-                        <ControlLabel>Password</ControlLabel>
-                        <FormControl type="password" name="confirmPassword" value={confirmPassword}
-                                     onChange={this.handleChange}/>
-                    </FormGroup>
-
                     <FormGroup>
-                        <Button type="submit" bsStyle="primary">Register</Button>
+                        <Button type="submit" bsStyle="primary">Login</Button>
+                        <Link to='/forgot-password' className="pull-right">Forgot password</Link>
                     </FormGroup>
                 </form>
             </Col>
@@ -77,5 +72,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connecterRegister = connect(mapStateToProps)(Register);
-export {connecterRegister as Register};
+const connectedLogin = connect(mapStateToProps)(Login);
+export {connectedLogin as Login};

@@ -4,7 +4,7 @@ import {Button, Col, ControlLabel, FormControl, FormGroup} from 'react-bootstrap
 import {userActions} from "../store/actions/";
 
 
-class Login extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
 
@@ -12,8 +12,10 @@ class Login extends Component {
         // this.props.dispatch(userActions.logout());
 
         this.state = {
+            fullName: '',
             email: '',
             password: '',
+            confirmPassword: '',
             submitted: false
         };
 
@@ -30,20 +32,25 @@ class Login extends Component {
         e.preventDefault();
 
         this.setState({submitted: true});
-        const {email, password} = this.state;
+        const {fullName, email, password, confirmPassword} = this.state;
         const {dispatch} = this.props;
-        if (email && password) {
-            dispatch(userActions.login(email, password));
+        if (fullName && email && password && confirmPassword) {
+            dispatch(userActions.register(fullName, email, password));
         }
     }
 
     render() {
         const {loggingIn} = this.props;
-        const {email, password, submitted} = this.state;
+        const {fullName, email, password, confirmPassword, submitted} = this.state;
         return (
             <Col md={6} mdOffset={3}>
-                <h2>Login</h2>
+                <h2>Register</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
+                    <FormGroup controlId="formFullName">
+                        <ControlLabel>Full name</ControlLabel>
+                        <FormControl type="text" name="fullName" value={fullName} onChange={this.handleChange}/>
+                    </FormGroup>
+
                     <FormGroup controlId="formEmail">
                         <ControlLabel>Email</ControlLabel>
                         <FormControl type="email" name="email" value={email} onChange={this.handleChange}/>
@@ -54,8 +61,14 @@ class Login extends Component {
                         <FormControl type="password" name="password" value={password} onChange={this.handleChange}/>
                     </FormGroup>
 
+                    <FormGroup controlId="formConfirmPassword">
+                        <ControlLabel>Confirm password</ControlLabel>
+                        <FormControl type="password" name="confirmPassword" value={confirmPassword}
+                                     onChange={this.handleChange}/>
+                    </FormGroup>
+
                     <FormGroup>
-                        <Button type="submit" bsStyle="primary">Login</Button>
+                        <Button type="submit" bsStyle="primary">Register</Button>
                     </FormGroup>
                 </form>
             </Col>
@@ -70,5 +83,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedLogin = connect(mapStateToProps)(Login);
-export {connectedLogin as Login};
+const connectedRegister = connect(mapStateToProps)(Register);
+export {connectedRegister as Register};
