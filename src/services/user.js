@@ -4,7 +4,8 @@ import {loginHeader} from "../helpers";
 export const userService = {
     login,
     register,
-    forgotPassword
+    forgotPassword,
+    resetPassword
 };
 
 function login(email, password) {
@@ -61,7 +62,7 @@ function register(fullName, email, password) {
 
 function forgotPassword(email) {
     const requestOptions = {
-        method: 'PUT',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
@@ -70,6 +71,27 @@ function forgotPassword(email) {
     };
 
     return fetch('/auth/forgot-password', requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then((resp) => {
+                    throw new Error(resp.message);
+                });
+            }
+            return response.json();
+        });
+}
+
+function resetPassword(token, password) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({password})
+    };
+
+    return fetch(`/auth/forgot-password?token=${token}`, requestOptions)
         .then(response => {
             if (!response.ok) {
                 return Promise.reject(response.statusText);

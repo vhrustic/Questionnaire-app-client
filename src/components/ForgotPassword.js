@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Button, Col, ControlLabel, FormControl, FormGroup} from 'react-bootstrap'
+import {Alert, Button, Col, ControlLabel, FormControl, FormGroup} from 'react-bootstrap'
 import {userActions} from "../store/actions/";
+import {Link} from "react-router-dom";
 
 
 class ForgotPassword extends Component {
@@ -34,10 +35,14 @@ class ForgotPassword extends Component {
         const {email} = this.state;
         const {message, isSuccess} = this.props;
         return (
-            <Col md={6} mdOffset={3}>
+            <Col md={8} mdOffset={2}>
                 <h2>Forgot password</h2>
-                <p>{message}</p>
-                <p>{isSuccess}</p>
+                {(!isSuccess && message) && <Alert bsStyle="danger"><p>{message}</p></Alert>}
+                {isSuccess &&
+                <div>
+                    <Alert bsStyle="info"><p>{message}</p></Alert> <Link to='/'>Home</Link>
+                </div>}
+                {!isSuccess &&
                 <form name="form" onSubmit={this.handleSubmit}>
                     <FormGroup controlId="formEmail">
                         <ControlLabel>Enter your email</ControlLabel>
@@ -46,13 +51,13 @@ class ForgotPassword extends Component {
                     <FormGroup>
                         <Button type="submit" bsStyle="primary">Send email</Button>
                     </FormGroup>
-                </form>
+                </form>}
             </Col>
         );
     }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     const {message, isSuccess} = state.forgotPassword;
     return {
         message, isSuccess

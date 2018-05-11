@@ -43,7 +43,7 @@ class Register extends Component {
         const {loggingIn} = this.props;
         const {fullName, email, password, confirmPassword, submitted} = this.state;
         return (
-            <Col md={6} mdOffset={3}>
+            <Col md={8} mdOffset={2}>
                 <h2>Register</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <FormGroup controlId="formFullName">

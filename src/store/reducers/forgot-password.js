@@ -19,10 +19,10 @@ export const forgotPassword = (state = initialState, action) => {
                 isSuccess: true,
                 message: action.message
             };
-        case userConstants.REGISTER_FAILURE:
+        case userConstants.FORGOT_PASSWORD_FAILURE:
             return {
                 ...state,
-                isSuccess: true,
+                isSuccess: false,
                 message: action.message
             };
         default:

@@ -42,7 +42,7 @@ class Login extends Component {
         const {loggingIn} = this.props;
         const {email, password, submitted} = this.state;
         return (
-            <Col md={6} mdOffset={3}>
+            <Col md={8} mdOffset={2}>
                 <h2>Login</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <FormGroup controlId="formEmail">

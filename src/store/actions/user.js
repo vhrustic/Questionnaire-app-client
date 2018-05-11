@@ -74,24 +74,22 @@ function forgotPassword(email) {
         userService.forgotPassword(email)
             .then(
                 response => {
-                    dispatch(success(response));
-                    history.push('/');
-                },
-                error => {
-                    dispatch(failure(error));
+                    dispatch(success(response.message));
                 }
-            );
+            ).catch(err => {
+            dispatch(failure(err.message));
+        });
     };
 
     function request(email) {
         return {type: userConstants.FORGOT_PASSWORD_REQUEST, email}
     }
 
-    function success(response) {
-        return {type: userConstants.FORGOT_PASSWORD_SUCCESS, response}
+    function success(message) {
+        return {type: userConstants.FORGOT_PASSWORD_SUCCESS, message}
     }
 
-    function failure(err) {
-        return {type: userConstants.FORGOT_PASSWORD_FAILURE, err}
+    function failure(message) {
+        return {type: userConstants.FORGOT_PASSWORD_FAILURE, message}
     }
 }
