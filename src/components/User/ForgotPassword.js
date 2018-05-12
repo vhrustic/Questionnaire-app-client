@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Alert, Button, Col, ControlLabel, FormControl, FormGroup} from 'react-bootstrap'
-import {userActions} from "../store/actions/";
+import {userActions} from "../../store/actions/index";
 import {Link} from "react-router-dom";
 
 

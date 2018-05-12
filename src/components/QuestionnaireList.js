@@ -8,7 +8,7 @@ class QuestionnaireList extends Component {
 
     render() {
         return (
-            <Table responsive>
+            <Table responsive condensed hover>
                 <thead>
                 <tr>
                     <th>Name</th>

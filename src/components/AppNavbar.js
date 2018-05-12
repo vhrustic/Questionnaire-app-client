@@ -38,4 +38,4 @@ class AppNavbar extends Component {
     }
 }
 
-export default AppNavbar
+export {AppNavbar};

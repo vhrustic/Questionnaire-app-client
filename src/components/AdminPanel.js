@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import QuestionnaireList from "./QuestionnaireList";
+import {Button} from "react-bootstrap";
+import {history} from './../helpers';
+
 
 class AdminPanel extends Component {
     constructor(props) {
@@ -9,10 +12,15 @@ class AdminPanel extends Component {
         // this.props.dispatch(userActions.logout());
     }
 
+    redirectToNewQuestionnaire() {
+        history.push('/new-questionnaire');
+    }
+
     render() {
         return (
             <div>
-                <p>Add new</p>
+                <h2>Questionnaires</h2>
+                <Button bsStyle="primary" onClick={this.redirectToNewQuestionnaire}>Create new</Button>
                 <QuestionnaireList/>
             </div>
         );
