@@ -1,20 +1,22 @@
-import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import {authentication, forgotPassword, registration, resetPassword} from './reducers';
+import {authentication, forgotPassword, questionnaire, registration, resetPassword} from './reducers';
 
 const rootReducer = combineReducers({
     authentication,
     registration,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    questionnaire,
 });
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
     rootReducer,
-    applyMiddleware(
+    composeEnhancers(applyMiddleware(
         thunkMiddleware
-    )
+    ))
 );
 
 export default store;
