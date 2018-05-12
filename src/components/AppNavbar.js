@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Nav, Navbar, NavItem} from 'react-bootstrap'
+import {Glyphicon, Nav, Navbar, NavItem} from 'react-bootstrap'
 
 class AppNavbar extends Component {
     constructor(props) {
@@ -26,10 +26,10 @@ class AppNavbar extends Component {
                             Register
                         </NavItem>
                         <NavItem eventKey={2} href="#">
-                            <i className="glyphicon glyphicon-log-in"/> Login
+                            <Glyphicon glyph="log-in"/> Login
                         </NavItem>
                         <NavItem eventKey={2} href="#">
-                            <i className="glyphicon glyphicon-log-out"/> Logout
+                            <Glyphicon glyph="log-out"/> Logout
                         </NavItem>
                     </Nav>
                 </Navbar.Collapse>

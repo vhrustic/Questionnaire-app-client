@@ -16,7 +16,7 @@ class EditableQuestionnaireList extends Component {
 
         return (
             <ListGroup>
-                {data.map(questionnaire => <EditableQuestionnaireListItem title={questionnaire.title}
+                {data.map(questionnaire => <EditableQuestionnaireListItem title={questionnaire.title} key={questionnaire.title}
                                                                           type={questionnaire.type}/>)}
             </ListGroup>
         );

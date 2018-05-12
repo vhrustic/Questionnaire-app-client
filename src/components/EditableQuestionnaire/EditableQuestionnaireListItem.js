@@ -9,11 +9,11 @@ class EditableQuestionnaireListItem extends Component {
     render() {
         return (
             <ListGroupItem header={this.props.title}>
-                Question type: {this.props.type}
-                <ButtonGroup className="pull-right">
+                <span>Question type: {this.props.type}</span>
+                <span className="pull-right">
                     <Button bsSize="xsmall" bsStyle="primary">Edit</Button>
-                    <Button bsSize="xsmall" bsStyle="danger">Delete</Button>
-                </ButtonGroup>
+                     <Button bsSize="xsmall" bsStyle="danger">Delete</Button>
+                </span>
             </ListGroupItem>
         );
     }

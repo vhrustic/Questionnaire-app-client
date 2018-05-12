@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, ControlLabel, FormControl, FormGroup, Modal} from "react-bootstrap";
 import {questionType} from "../../../constants";
+import {MultipleChoiceQuestion} from "./MultipleChoiceQuestion";
 
 class EditableQuestion extends Component {
     constructor(props) {
@@ -25,19 +26,12 @@ class EditableQuestion extends Component {
                         <FormGroup controlId="formControlsSelect">
                             <ControlLabel>Select question type</ControlLabel>
                             <FormControl componentClass="select" placeholder="select">
-                                {questionTypes.map(questionType => <option
+                                {questionTypes.map(questionType => <option key={questionType[0]}
                                     value={questionType[0]}>{questionType[1]}</option>)}
                             </FormControl>
                         </FormGroup>
 
-
-                        <h4>Text in a modal</h4>
-                        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-
-                        <h4>Popover in a modal</h4>
-
-
-                        <hr/>
+                        <MultipleChoiceQuestion/>
 
                     </Modal.Body>
                     <Modal.Footer>
