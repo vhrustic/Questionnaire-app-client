@@ -33,7 +33,7 @@ class EditableQuestionnairePage extends Component {
     render() {
         return (
             <div>
-                <Button bsStyle="success" style={{marginBottom: '15px'}} onClick={this.handleAddQuestion}>Add question</Button>
+                <Button bsStyle="info" style={{marginBottom: '15px'}} onClick={this.handleAddQuestion}>Add question</Button>
                 <EditableQuestionnaireList/>
                 <EditableQuestion show={this.state.show} closeModal={this.handleClose}/>
             </div>

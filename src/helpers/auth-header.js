@@ -4,7 +4,7 @@ export const authHeader = () => {
     let user = JSON.parse(localStorage.getItem(userAuthConstants.LOCAL_STORAGE_USER_KEY));
 
     if (user && user.token) {
-        return {[userAuthConstants.HEADER_AUTH_KEY]: `${userAuthConstants.HEADER_AUTH_VALUE_PREFIX}  ${user.token}`};
+        return {[userAuthConstants.HEADER_AUTH_KEY]: `${userAuthConstants.TOKEN_AUTH_VALUE_PREFIX} ${user.token}`};
     } else {
         return {};
     }

@@ -3,6 +3,8 @@ import {Button, Modal} from "react-bootstrap";
 import {MultipleChoiceQuestion} from "./MultipleChoiceQuestion";
 import {EditableQuestionInfo} from "./EditableQuestionInfo";
 import {questionType} from "../../../constants";
+import {connect} from "react-redux";
+import {questionActions} from "../../../store/actions";
 
 class EditableQuestion extends Component {
     constructor(props) {
@@ -17,6 +19,7 @@ class EditableQuestion extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleAddOption = this.handleAddOption.bind(this);
+        this.handleSave = this.handleSave.bind(this);
     }
 
     handleChange(e) {
@@ -47,6 +50,16 @@ class EditableQuestion extends Component {
         this.setState({options: newOptions});
     };
 
+    handleSave() {
+        const {dispatch} = this.props;
+        dispatch(questionActions.newQuestion({
+            title: '',
+            type: Object.keys(questionType)[0] // default question type: Text
+        }));
+        this.setState({show: true});
+        this.props.closeModal();
+    };
+
     render() {
         const {show, closeModal} = this.props;
         const {title, type, options} = this.state;
@@ -65,6 +78,7 @@ class EditableQuestion extends Component {
                                                 onChangeHandler={this.handleOptionChange}/>}
                     </Modal.Body>
                     <Modal.Footer>
+                        <Button bsStyle="success" onClick={this.handleSave}>Save</Button>
                         <Button onClick={closeModal}>Close</Button>
                     </Modal.Footer>
                 </form>
@@ -73,4 +87,5 @@ class EditableQuestion extends Component {
     }
 }
 
-export {EditableQuestion};
+const connectedEditableQuestion = connect()(EditableQuestion);
+export {connectedEditableQuestion as EditableQuestion};
