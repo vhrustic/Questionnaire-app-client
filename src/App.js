@@ -5,6 +5,7 @@ import {Router, Route} from 'react-router-dom';
 import {history} from './helpers';
 import {AdminPanel, ForgotPassword, Login, Register} from './components';
 import {PrivateRoute} from "./components/PrivateRoute";
+import {ResetPassword} from "./components/ResetPassword";
 
 class App extends Component {
     render() {
@@ -18,6 +19,7 @@ class App extends Component {
                                 <Route exact path="/login" component={Login}/>
                                 <Route exact path="/register" component={Register}/>
                                 <Route exact path="/forgot-password" component={ForgotPassword}/>
+                                <Route path="/reset-password" component={ResetPassword}/>
                             </div>
                         </Router>
                     </Col>

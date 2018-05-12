@@ -5,7 +5,8 @@ import {userService} from "../../services";
 export const userActions = {
     login,
     register,
-    forgotPassword
+    forgotPassword,
+    resetPassword
 };
 
 function login(email, password) {
@@ -93,3 +94,32 @@ function forgotPassword(email) {
         return {type: userConstants.FORGOT_PASSWORD_FAILURE, message}
     }
 }
+
+
+function resetPassword(token, password) {
+    return dispatch => {
+        dispatch(request());
+
+        userService.resetPassword(token, password)
+            .then(
+                response => {
+                    dispatch(success(response.message));
+                }
+            ).catch(err => {
+            dispatch(failure(err.message));
+        });
+    };
+
+    function request(email) {
+        return {type: userConstants.UPDATE_PASSWORD_REQUEST}
+    }
+
+    function success(message) {
+        return {type: userConstants.UPDATE_PASSWORD_SUCCESS, message}
+    }
+
+    function failure(message) {
+        return {type: userConstants.UPDATE_PASSWORD_FAILURE, message}
+    }
+}
+

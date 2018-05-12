@@ -94,7 +94,9 @@ function resetPassword(token, password) {
     return fetch(`/auth/forgot-password?token=${token}`, requestOptions)
         .then(response => {
             if (!response.ok) {
-                return Promise.reject(response.statusText);
+                return response.json().then((resp) => {
+                    throw new Error(resp.message);
+                });
             }
             return response.json();
         });

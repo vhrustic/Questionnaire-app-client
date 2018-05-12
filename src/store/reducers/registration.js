@@ -19,6 +19,6 @@ export function registration(state = initialState, action) {
         case userConstants.REGISTER_FAILURE:
             return {};
         default:
-            return state
+            return state;
     }
 };
