@@ -2,3 +2,8 @@ export * from './Login';
 export * from './Register';
 export * from './AdminPanel';
 export * from './ForgotPassword';
+export * from './AppNavbar';
+export * from './AdminPanel';
+export * from './ResetPassword';
+export * from './PrivateRoute';
+export * from './QuestionnaireList';

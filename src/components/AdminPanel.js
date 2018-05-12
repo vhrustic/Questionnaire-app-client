@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import QuestionnaireList from "./QuestionnaireList";
 
 class AdminPanel extends Component {
     constructor(props) {
@@ -11,7 +11,10 @@ class AdminPanel extends Component {
 
     render() {
         return (
-           <p>Welcome to ADMIN PANEL</p>
+            <div>
+                <p>Add new</p>
+                <QuestionnaireList/>
+            </div>
         );
     }
 }
