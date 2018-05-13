@@ -11,12 +11,6 @@ class EditableQuestionnaire extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        const {dispatch} = this.props;
-        const {questionnaireId} = this.props.match.params;
-        dispatch(questionnaireActions.loadQuestionnaire(questionnaireId));
-    }
-
     render() {
         const {questionnaireId} = this.props.match.params;
         return (
@@ -24,7 +18,7 @@ class EditableQuestionnaire extends Component {
                 <EditableQuestionnaireHeader questionnaireId={questionnaireId}/>
                 <PrivateRoute roles={['admin']} path="/edit-questionnaire/:questionnaireId/:pageId"
                               component={EditableQuestionnairePage}/>
-                <EditableQuestionnaireFooter/>
+                <EditableQuestionnaireFooter questionnaireId={questionnaireId}/>
             </div>
         );
     }

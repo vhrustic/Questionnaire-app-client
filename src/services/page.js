@@ -1,9 +1,9 @@
 import {HTTP_DELETE, HTTP_GET, HTTP_POST} from "../constants";
 import {getRequestOptionsWithAuth} from "../helpers";
 
-const loadPage = (pageId) => {
+const loadPage = (questionnaireId, pageId) => {
     const requestOptions = getRequestOptionsWithAuth(HTTP_GET);
-    return fetch(`/pages/${pageId}`, requestOptions)
+    return fetch(`/pages/${questionnaireId}/${pageId}`, requestOptions)
         .then(response => {
             if (!response.ok) {
                 return response.json().then((resp) => {
@@ -14,9 +14,9 @@ const loadPage = (pageId) => {
         });
 };
 
-const createPage = (title) => {
+const createPage = (questionnaireId) => {
     const requestOptions = getRequestOptionsWithAuth(HTTP_POST, {});
-    return fetch('/pages', requestOptions)
+    return fetch(`/pages/${questionnaireId}`, requestOptions)
         .then(response => {
             if (!response.ok) {
                 return response.json().then((resp) => {

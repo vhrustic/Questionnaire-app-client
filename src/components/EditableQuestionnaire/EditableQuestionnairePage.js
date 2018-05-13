@@ -4,6 +4,7 @@ import {Button} from "react-bootstrap";
 import {EditableQuestion} from "./Modal";
 import {connect} from "react-redux";
 import {pageActions} from "../../store/actions/page";
+import {questionnaireActions} from "../../store/actions/questionnaire";
 
 
 class EditableQuestionnairePage extends Component {
@@ -19,8 +20,9 @@ class EditableQuestionnairePage extends Component {
 
     componentDidMount() {
         const {dispatch} = this.props;
-        const {pageId} = this.props.match.params;
-        dispatch(pageActions.loadPage(pageId)) // dispatch loadPage
+        const {questionnaireId, pageId} = this.props.match.params;
+        dispatch(questionnaireActions.loadQuestionnaire(questionnaireId));
+        dispatch(pageActions.loadPage(questionnaireId, pageId)) // dispatch loadPage
     }
 
     handleClose() {

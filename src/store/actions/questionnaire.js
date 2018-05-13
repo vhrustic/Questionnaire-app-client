@@ -59,8 +59,6 @@ const loadQuestionnaire = (questionnaireId) => {
             .then(
                 questionnaire => {
                     dispatch(success(questionnaire));
-                    const page = questionnaire.pages[0].id;
-                    redirectTo(`/edit-questionnaire/${questionnaire.id}/${page}`);
                 },
                 error => {
                     dispatch(failure(error.message));
