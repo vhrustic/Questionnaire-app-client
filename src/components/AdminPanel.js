@@ -16,16 +16,28 @@ class AdminPanel extends Component {
         dispatch(questionnaireActions.newQuestionnaire(DEFAULT_QUESTIONNAIRE_TITLE));
     }
 
+    componentDidMount() {
+        const {dispatch} = this.props;
+        dispatch(questionnaireActions.loadQuestionnaires());
+    }
+
     render() {
+        const {questionnaires} = this.props;
         return (
             <div>
                 <h3>Questionnaires</h3>
                 <Button bsStyle="primary" onClick={this.handleNewQuestionnaire}>Create new</Button>
-                <QuestionnaireList/>
+                <QuestionnaireList questionnaires ={questionnaires}/>
             </div>
         );
     }
 }
 
-const connectedAdminPanel = connect()(AdminPanel);
+const mapStateToProps = (state) => {
+    return {
+        questionnaires: state.questionnaires.questionnaires
+    };
+};
+
+const connectedAdminPanel = connect(mapStateToProps)(AdminPanel);
 export {connectedAdminPanel as AdminPanel};

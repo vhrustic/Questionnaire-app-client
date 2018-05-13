@@ -1,5 +1,18 @@
-import {HTTP_DELETE, HTTP_GET, HTTP_POST} from "../constants";
+import {HTTP_DELETE, HTTP_GET, HTTP_POST, HTTP_PUT} from "../constants";
 import {getRequestOptionsWithAuth} from "../helpers";
+
+const loadQuestionnaires = () => {
+    const requestOptions = getRequestOptionsWithAuth(HTTP_GET);
+    return fetch(`/questionnaires`, requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then((resp) => {
+                    throw new Error(resp.message);
+                });
+            }
+            return response.json();
+        });
+};
 
 const loadQuestionnaire = (questionnaireId) => {
     const requestOptions = getRequestOptionsWithAuth(HTTP_GET);
@@ -41,7 +54,7 @@ const deleteQuestionnaire = (questionnaireId) => {
 };
 
 const updateQuestionnaire = (questionnaireId, questionnaire) => {
-    const requestOptions = getRequestOptionsWithAuth(HTTP_DELETE, questionnaire);
+    const requestOptions = getRequestOptionsWithAuth(HTTP_PUT, questionnaire);
     return fetch(`/questionnaires/${questionnaireId}`, requestOptions)
         .then(response => {
             if (!response.ok) {
@@ -56,6 +69,7 @@ const updateQuestionnaire = (questionnaireId, questionnaire) => {
 export const questionnaireService = {
     createQuestionnaire,
     loadQuestionnaire,
+    loadQuestionnaires,
     deleteQuestionnaire,
     updateQuestionnaire
 };

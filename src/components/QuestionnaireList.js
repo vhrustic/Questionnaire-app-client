@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Table} from "react-bootstrap";
+import {Button, ButtonGroup, Table} from "react-bootstrap";
 
 class QuestionnaireList extends Component {
     constructor(props) {
@@ -7,23 +7,27 @@ class QuestionnaireList extends Component {
     }
 
     render() {
+        const {questionnaires} = this.props;
         return (
             <Table responsive condensed hover>
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Date created</th>
                     <th>Options</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Que1</td>
-                    <td>First quest</td>
-                    <td>12.5.2018 13:00</td>
-                    <td>Edit Delete</td>
-                </tr>
+                {questionnaires.map(questionnaire => (<tr key={questionnaire.id}>
+                    <td>{questionnaire.title}</td>
+                    <td>{questionnaire.createdAt}</td>
+                    <td>
+                        <ButtonGroup>
+                            <Button bsSize="xsmall" bsStyle="primary" href={`/edit-questionnaire/${questionnaire.id}`}>Edit</Button>
+                            <Button bsSize="xsmall" bsStyle="danger">Delete</Button>
+                        </ButtonGroup>
+                    </td>
+                </tr>))}
                 </tbody>
             </Table>
         );

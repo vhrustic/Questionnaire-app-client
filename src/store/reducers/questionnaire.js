@@ -30,6 +30,11 @@ export function questionnaire(state = initialState, action) {
                 ...state,
                 id: action.createdQuestionnaire.id
             };
+        case questionnaireConstants.UPDATE_QUESTIONNAIRE_SUCCESS:
+            return {
+                ...state,
+                title: action.questionnaire
+            };
         case questionnaireConstants.LOAD_QUESTIONNAIRE_SUCCESS:
             return {
                 ...state,

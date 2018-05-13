@@ -26,6 +26,24 @@ const newQuestionnaire = (title) => {
     };
 };
 
+const loadQuestionnaires = () => {
+    const success = (questionnaires) => ({
+        type: questionnaireConstants.LOAD_QUESTIONNAIRES_SUCCESS,
+        questionnaires
+    });
+
+    return dispatch => {
+        questionnaireService.loadQuestionnaires()
+            .then(
+                questionnaires => {
+                    dispatch(success(questionnaires));
+                },
+                error => {
+                    // dispatch(failure(error.message));
+                }
+            );
+    };
+};
 
 const loadQuestionnaire = (questionnaireId) => {
     const loadQuestionnaire = (questionnaire) => ({type: questionnaireConstants.LOAD_QUESTIONNAIRE, questionnaire});
@@ -41,6 +59,8 @@ const loadQuestionnaire = (questionnaireId) => {
             .then(
                 questionnaire => {
                     dispatch(success(questionnaire));
+                    const page = questionnaire.pages[0].id;
+                    redirectTo(`/edit-questionnaire/${questionnaire.id}/${page}`);
                 },
                 error => {
                     dispatch(failure(error.message));
@@ -50,7 +70,31 @@ const loadQuestionnaire = (questionnaireId) => {
 };
 
 
+const updateQuestionnaire = (questionnaireId, questionnaire) => {
+    const success = (questionnaire) => ({
+        type: questionnaireConstants.UPDATE_QUESTIONNAIRE_SUCCESS,
+        questionnaire
+    });
+
+    return dispatch => {
+        questionnaireService.updateQuestionnaire(questionnaireId, questionnaire)
+            .then(
+                () => {
+                    dispatch(success({title: questionnaire.title}));
+                },
+                error => {
+                    // dispatch(failure(error.message));
+                }
+            );
+    };
+};
+
+
+
+
 export const questionnaireActions = {
     newQuestionnaire,
     loadQuestionnaire,
+    loadQuestionnaires,
+    updateQuestionnaire,
 };
