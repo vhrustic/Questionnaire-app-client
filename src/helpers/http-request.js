@@ -1,4 +1,5 @@
 import {authHeader} from "./auth-header";
+import {HTTP_GET} from "../constants";
 
 export const getRequestOptionsWithAuth = (httpMethod, payload) => {
     const authHeaders = authHeader();
@@ -9,7 +10,9 @@ export const getRequestOptionsWithAuth = (httpMethod, payload) => {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        body: JSON.stringify(payload)
     };
+    if (httpMethod !== HTTP_GET) {
+        requestOptions.body = JSON.stringify(payload);
+    }
     return requestOptions;
 };

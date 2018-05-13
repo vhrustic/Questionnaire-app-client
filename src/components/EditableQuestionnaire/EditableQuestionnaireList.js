@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {ListGroup, ListGroupItem} from "react-bootstrap";
+import {ListGroup} from "react-bootstrap";
 import {EditableQuestionnaireListItem} from "./EditableQuestionnaireListItem";
+import {connect} from "react-redux";
 
 class EditableQuestionnaireList extends Component {
     constructor(props) {
@@ -8,19 +9,21 @@ class EditableQuestionnaireList extends Component {
     }
 
     render() {
-
-        const data = [{title: 'My questionnaire', type: 'multiple choice'}, {
-            title: 'Another my questionnaire 2',
-            type: 'yes / no'
-        }];
-
+        const {questions} = this.props;
         return (
             <ListGroup>
-                {data.map(questionnaire => <EditableQuestionnaireListItem title={questionnaire.title} key={questionnaire.title}
-                                                                          type={questionnaire.type}/>)}
+                {questions.map(question => <EditableQuestionnaireListItem title={question.title} key={question.id}
+                                                                          type={question.type}/>)}
             </ListGroup>
         );
     }
 }
 
-export {EditableQuestionnaireList};
+const mapStateToProps = (state) => {
+    return {
+        questions: state.page.questions
+    }
+};
+
+const connectedEditableQuestionnaireList = connect(mapStateToProps)(EditableQuestionnaireList);
+export {connectedEditableQuestionnaireList as EditableQuestionnaireList};

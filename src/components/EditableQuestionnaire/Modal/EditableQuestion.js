@@ -52,11 +52,10 @@ class EditableQuestion extends Component {
 
     handleSave() {
         const {dispatch} = this.props;
+        const {title, type, options} = this.state;
         dispatch(questionActions.newQuestion({
-            title: '',
-            type: Object.keys(questionType)[0] // default question type: Text
+            title, type, options
         }));
-        this.setState({show: true});
         this.props.closeModal();
     };
 

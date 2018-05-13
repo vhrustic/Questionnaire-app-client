@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, ControlLabel, FormControl, FormGroup, Row} from "react-bootstrap";
+import {Button, ControlLabel, FormControl, FormGroup} from "react-bootstrap";
 
 class EditableQuestionnaireHeader extends Component {
     constructor(props) {

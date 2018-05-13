@@ -3,7 +3,17 @@ import './App.css';
 import {Col, Row} from 'react-bootstrap';
 import {Router, Route} from 'react-router-dom';
 import {history} from './helpers';
-import {AdminPanel, ForgotPassword, Login, Register, PrivateRoute, ResetPassword, AppNavbar, EditableQuestionnaire} from './components';
+import {
+    AdminPanel,
+    ForgotPassword,
+    Login,
+    Register,
+    PrivateRoute,
+    ResetPassword,
+    AppNavbar,
+    EditableQuestionnaire,
+    EditableQuestionnairePage
+} from './components';
 
 class App extends Component {
     render() {
@@ -18,7 +28,7 @@ class App extends Component {
                             <Route exact path="/register" component={Register}/>
                             <Route exact path="/forgot-password" component={ForgotPassword}/>
                             <Route path="/reset-password" component={ResetPassword}/>
-                            <PrivateRoute roles={['admin']} path="/new-questionnaire" component={EditableQuestionnaire}/>
+                            <PrivateRoute roles={['admin']} path="/edit-questionnaire/:questionnaireId" component={EditableQuestionnaire}/>
                         </Col>
                     </Router>
                 </Row>

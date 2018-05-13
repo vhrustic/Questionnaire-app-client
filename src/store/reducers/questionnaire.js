@@ -1,4 +1,4 @@
-import {pageConstants, questionConstants, questionnaireConstants} from "../../constants";
+import {questionConstants, questionnaireConstants} from "../../constants";
 
 const initialState = {
     title: '',
@@ -14,9 +14,11 @@ export function questionnaire(state = initialState, action) {
                 pages: [{questions: []}]
             };
         case questionConstants.CREATE_NEW_QUESTION:
+            const newPages = [...state.pages];
+            newPages[action.activePage].push(action.newQuestion);
             return {
                 ...state,
-                pages: [...state.pages, action.newQuestion]
+                pages: newPages
             };
         case questionnaireConstants.CREATE_NEW_QUESTIONNAIRE_FAIL:
             return {
@@ -27,6 +29,11 @@ export function questionnaire(state = initialState, action) {
             return {
                 ...state,
                 id: action.createdQuestionnaire.id
+            };
+        case questionnaireConstants.LOAD_QUESTIONNAIRE_SUCCESS:
+            return {
+                ...state,
+                ...action.questionnaire
             };
         default:
             return state;

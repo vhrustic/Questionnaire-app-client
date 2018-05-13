@@ -5,6 +5,7 @@ import {EditableQuestionnaireHeader} from './EditableQuestionnaireHeader';
 import {questionnaireActions} from '../../store/actions/questionnaire';
 import {connect} from 'react-redux';
 import {DEFAULT_QUESTIONNAIRE_TITLE} from '../../constants';
+import {PrivateRoute} from "../PrivateRoute";
 
 class EditableQuestionnaire extends Component {
     constructor(props) {
@@ -18,8 +19,8 @@ class EditableQuestionnaire extends Component {
 
     componentDidMount() {
         const {dispatch} = this.props;
-        const {title} = this.state;
-        dispatch(questionnaireActions.newQuestionnaire(title));
+        const {questionnaireId} = this.props.match.params;
+        dispatch(questionnaireActions.loadQuestionnaire(questionnaireId));
     }
 
     handleChange(e) {
@@ -40,7 +41,7 @@ class EditableQuestionnaire extends Component {
             <div>
                 <EditableQuestionnaireHeader title={title} onTitleChange={this.handleChange}
                                              onSaveTitle={this.handleSubmit}/>
-                <EditableQuestionnairePage/>
+                <PrivateRoute roles={['admin']} path="/edit-questionnaire/:questionnaireId/:pageId" component={EditableQuestionnairePage}/>
                 <EditableQuestionnaireFooter/>
             </div>
         );

@@ -1,10 +1,10 @@
 import {questionConstants} from "../../constants";
 
-const newQuestion = (newQuestion) => {
-    const createNewQuestion = (newQuestion) => ({type: questionConstants.CREATE_NEW_QUESTION, newQuestion});
+const newQuestion = (newQuestion, activePage) => {
+    const createNewQuestion = (newQuestion, activePage) => ({type: questionConstants.CREATE_NEW_QUESTION, newQuestion, activePage});
 
     return dispatch => {
-        dispatch(createNewQuestion(newQuestion));
+        dispatch(createNewQuestion(newQuestion, activePage));
     };
 };
 

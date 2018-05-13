@@ -1,6 +1,6 @@
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import {authentication, forgotPassword, questionnaire, registration, resetPassword} from './reducers';
+import {authentication, forgotPassword, page, questionnaire, registration, resetPassword} from './reducers';
 
 const rootReducer = combineReducers({
     authentication,
@@ -8,6 +8,7 @@ const rootReducer = combineReducers({
     forgotPassword,
     resetPassword,
     questionnaire,
+    page,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

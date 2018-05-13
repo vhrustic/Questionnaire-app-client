@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import QuestionnaireList from "./QuestionnaireList";
 import {Button} from "react-bootstrap";
-import {redirectTo} from "../helpers";
+import {questionnaireActions} from "../store/actions/questionnaire";
+import {connect} from "react-redux";
+import {DEFAULT_QUESTIONNAIRE_TITLE} from "../constants";
 
 class AdminPanel extends Component {
     constructor(props) {
@@ -10,7 +12,8 @@ class AdminPanel extends Component {
     }
 
     handleNewQuestionnaire() {
-        redirectTo('/new-questionnaire');
+        const {dispatch} = this.props;
+        dispatch(questionnaireActions.newQuestionnaire(DEFAULT_QUESTIONNAIRE_TITLE));
     }
 
     render() {
@@ -24,4 +27,5 @@ class AdminPanel extends Component {
     }
 }
 
-export {AdminPanel};
+const connectedAdminPanel = connect()(AdminPanel);
+export {connectedAdminPanel as AdminPanel};
