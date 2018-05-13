@@ -17,6 +17,7 @@ class EditableQuestionnairePage extends Component {
         this.handleAddQuestion = this.handleAddQuestion.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleEditQuestion = this.handleEditQuestion.bind(this);
+        this.handleDeleteQuestion = this.handleDeleteQuestion.bind(this);
     }
 
     componentDidMount() {
@@ -28,6 +29,8 @@ class EditableQuestionnairePage extends Component {
 
     handleClose() {
         this.setState({show: false});
+        const {dispatch} = this.props;
+        dispatch(questionActions.clearQuestion());
     }
 
     handleAddQuestion() {
@@ -45,6 +48,13 @@ class EditableQuestionnairePage extends Component {
         };
     }
 
+    handleDeleteQuestion(questionId) {
+        return () => {
+            const {dispatch} = this.props;
+            dispatch(questionActions.deleteQuestion(questionId));
+        };
+    }
+
     render() {
         const {questionnaireId, pageId} = this.props.match.params;
         const {questions} = this.props;
@@ -52,7 +62,8 @@ class EditableQuestionnairePage extends Component {
             <div>
                 <Button bsStyle="info" style={{marginBottom: '15px'}} onClick={this.handleAddQuestion}>Add
                     question</Button>
-                <EditableQuestionnaireList questions={questions} onEditQuestion={this.handleEditQuestion}/>
+                <EditableQuestionnaireList questions={questions} onEditQuestion={this.handleEditQuestion}
+                                           onDeleteQuestion={this.handleDeleteQuestion}/>
                 <EditableQuestion show={this.state.show} closeModal={this.handleClose} questionnaireId={questionnaireId}
                                   pageId={pageId}/>
             </div>

@@ -23,6 +23,10 @@ export function question(state = initialState, action) {
             return {
                 ...initialState
             };
+        case questionConstants.CLEAR_QUESTION:
+            return {
+                ...initialState
+            };
         default:
             return state;
     }

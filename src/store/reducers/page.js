@@ -33,6 +33,11 @@ export function page(state = initialState, action) {
                 ...state,
                 questions: updatedQuestions
             };
+        case questionConstants.DELETE_QUESTION_SUCCESS:
+            return {
+                ...state,
+                questions: state.questions.filter(question => question.id !== action.questionId)
+            };
         default:
             return state;
     }

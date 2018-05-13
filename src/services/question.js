@@ -1,5 +1,5 @@
 import {getRequestOptionsWithAuth} from "../helpers";
-import {HTTP_GET, HTTP_POST, HTTP_PUT, questionType} from "../constants";
+import {HTTP_DELETE, HTTP_GET, HTTP_POST, HTTP_PUT, questionType} from "../constants";
 
 const getQuestionOptions = (type, options) => {
     if (type === questionType.YES_NO) {
@@ -56,8 +56,22 @@ const updateQuestion = (questionId, question) => {
         });
 };
 
+const deleteQuestion = (questionId) => {
+    const requestOptions = getRequestOptionsWithAuth(HTTP_DELETE);
+    return fetch(`/questions/${questionId}`, requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then((resp) => {
+                    throw new Error(resp.message);
+                });
+            }
+            return response.json();
+        });
+};
+
 export const questionService = {
     createQuestion,
     loadQuestion,
     updateQuestion,
+    deleteQuestion
 };

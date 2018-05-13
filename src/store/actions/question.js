@@ -2,7 +2,11 @@ import {questionConstants} from "../../constants";
 import {questionService} from "../../services/question";
 
 const newQuestion = (questionnaireId, pageId) => {
-    const createNewQuestion = (questionnaireId, pageId) => ({type: questionConstants.CREATE_NEW_QUESTION, newQuestion, pageId});
+    const createNewQuestion = (questionnaireId, pageId) => ({
+        type: questionConstants.CREATE_NEW_QUESTION,
+        newQuestion,
+        pageId
+    });
 
     return dispatch => {
         dispatch(createNewQuestion(questionnaireId, pageId));
@@ -57,11 +61,31 @@ const updateQuestion = (questionId, question) => {
     };
 };
 
+const clearQuestion = () => ({
+    type: questionConstants.CLEAR_QUESTION
+});
 
+const deleteQuestion = (questionId) => {
+    const success = (questionId) => ({type: questionConstants.DELETE_QUESTION_SUCCESS, questionId});
+
+    return dispatch => {
+        questionService.deleteQuestion(questionId)
+            .then(
+                () => {
+                    dispatch(success(questionId));
+                },
+                error => {
+                    // dispatch(failure(error.message));
+                }
+            );
+    };
+};
 
 export const questionActions = {
     newQuestion,
     createQuestion,
     loadQuestion,
-    updateQuestion
+    updateQuestion,
+    clearQuestion,
+    deleteQuestion
 };

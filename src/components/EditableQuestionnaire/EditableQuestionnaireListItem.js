@@ -1,15 +1,24 @@
 import React from 'react';
 import {Button, ListGroupItem} from "react-bootstrap";
+import {Confirm} from "react-confirm-bootstrap";
+import {questionTypeReadable} from "../../constants";
 
 const EditableQuestionnaireListItem = (props) => {
-    const {onEditQuestion, title, type, questionId} = props;
+    const {onEditQuestion, onDeleteQuestion, title, type, questionId} = props;
     return (
         <ListGroupItem header={title}>
-            <span>Question type: {type}</span>
+            <span>Question type: {questionTypeReadable[type]}</span>
             <span className="pull-right">
                     <Button bsSize="xsmall" bsStyle="primary" onClick={onEditQuestion(questionId)}>Edit</Button>
-                    <Button bsSize="xsmall" bsStyle="danger">Delete</Button>
+                    <Confirm
+                        onConfirm={onDeleteQuestion(questionId)}
+                        body={`Are you sure you want to delete question: ${title}`}
+                        confirmText="Confirm Delete"
+                        title="Delete question">
+                <Button bsSize="xsmall" bsStyle="danger">Delete</Button>
+            </Confirm>
                 </span>
+
         </ListGroupItem>
     );
 };
