@@ -14,6 +14,25 @@ export function page(state = initialState, action) {
                 ...action.page,
                 questions: [],
             };
+        case questionConstants.CREATE_NEW_QUESTION_SUCCESS:
+            return {
+                ...state,
+                questions: [...state.questions, action.question]
+            };
+        case questionConstants.UPDATE_QUESTION_SUCCESS:
+            const updatedQuestions = state.questions.map((question) => {
+                if (question.id !== action.question.id) {
+                    return question;
+                }
+                return {
+                    ...question,
+                    ...action.question
+                };
+            });
+            return {
+                ...state,
+                questions: updatedQuestions
+            };
         default:
             return state;
     }

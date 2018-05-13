@@ -12,8 +12,16 @@ export function question(state = initialState, action) {
             return initialState;
         case questionConstants.CREATE_NEW_QUESTION_SUCCESS:
             return {
+                ...initialState
+            };
+        case questionConstants.LOAD_QUESTION:
+            return {
                 ...state,
                 ...action.question
+            };
+        case questionConstants.UPDATE_QUESTION_SUCCESS:
+            return {
+                ...initialState
             };
         default:
             return state;

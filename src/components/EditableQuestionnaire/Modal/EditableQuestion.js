@@ -11,6 +11,7 @@ class EditableQuestion extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             title: '',
             type: questionType.TEXT,
             options: [
@@ -24,12 +25,13 @@ class EditableQuestion extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const {title, type} = this.state;
-        if (title !== nextProps.question.title || type !== nextProps.question.type) {
+        const {id, title, type} = this.state;
+        if (id !== nextProps.question.id || title !== nextProps.question.title || type !== nextProps.question.type) {
             this.setState({
                 title: nextProps.question.title,
                 type: nextProps.question.type,
-                options: nextProps.question.options
+                options: nextProps.question.options,
+                id: nextProps.question.id
             });
         }
     }
@@ -64,20 +66,26 @@ class EditableQuestion extends Component {
 
     handleSave() {
         const {dispatch, pageId} = this.props;
-        const {title, type, options} = this.state;
-        dispatch(questionActions.createQuestion(pageId, {
-            title, type, options
-        }));
+        const {id, title, type, options} = this.state;
+        const question = this.state;
+        if (id) { // edit mode
+            dispatch(questionActions.updateQuestion(id, question));
+        } else {
+            dispatch(questionActions.createQuestion(pageId, {
+                title, type, options
+            }));
+        }
         this.props.closeModal();
     };
 
     render() {
         const {show, closeModal} = this.props;
         const {title, type, options} = this.state;
+        const modalTitle = this.state.id ? 'Edit question' : 'Add new question';
         return (
             <Modal show={show} onHide={closeModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add new question</Modal.Title>
+                    <Modal.Title>{modalTitle}</Modal.Title>
                 </Modal.Header>
                 <form>
                     <Modal.Body>
