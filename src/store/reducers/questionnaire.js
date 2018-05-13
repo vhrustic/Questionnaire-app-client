@@ -26,7 +26,7 @@ export function questionnaire(state = initialState, action) {
         case questionnaireConstants.UPDATE_QUESTIONNAIRE_SUCCESS:
             return {
                 ...state,
-                title: action.questionnaire
+                title: action.questionnaire.title
             };
         case questionnaireConstants.LOAD_QUESTIONNAIRE_SUCCESS:
             return {

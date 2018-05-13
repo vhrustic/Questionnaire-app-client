@@ -27,11 +27,11 @@ class EditableQuestionnaireHeader extends Component {
     }
 
     handleSubmit(e) {
-        e.preventDefault();
         const {title} = this.state;
         const {dispatch} = this.props;
         const {questionnaireId} = this.props;
         dispatch(questionnaireActions.updateQuestionnaire(questionnaireId, {title}));
+        e.preventDefault();
     }
 
     render() {
@@ -39,13 +39,13 @@ class EditableQuestionnaireHeader extends Component {
         return (
             <div>
                 <h3>Create new questionnaire</h3>
-                <form name="questionnaireTitleForm" onSubmit={this.handleSubmit}>
+                <form name="questionnaireTitleForm">
                     <FormGroup controlId="formTitle">
                         <ControlLabel>Questionnaire title</ControlLabel>
                         <FormControl type="text" name="title" value={title} minLength={1} maxLength={150}
                                      onChange={this.handleChange}/>
                     </FormGroup>
-                    <Button bsStyle="success" className="pull-right">Update title</Button>
+                    <Button bsStyle="success" className="pull-right" onClick={this.handleSubmit}>Update title</Button>
                 </form>
             </div>
         );
