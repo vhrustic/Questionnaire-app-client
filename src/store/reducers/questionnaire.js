@@ -13,13 +13,6 @@ export function questionnaire(state = initialState, action) {
                 title: action.title,
                 pages: [{questions: []}]
             };
-        case questionConstants.CREATE_NEW_QUESTION:
-            const newPages = [...state.pages];
-            newPages[action.activePage].push(action.newQuestion);
-            return {
-                ...state,
-                pages: newPages
-            };
         case questionnaireConstants.CREATE_NEW_QUESTIONNAIRE_FAIL:
             return {
                 ...state,

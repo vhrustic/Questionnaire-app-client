@@ -6,12 +6,13 @@ import {questionType} from "../../../constants";
 import {connect} from "react-redux";
 import {questionActions} from "../../../store/actions";
 
+
 class EditableQuestion extends Component {
     constructor(props) {
         super(props);
         this.state = {
             title: '',
-            type: Object.keys(questionType)[0], // default question type: Text
+            type: questionType.TEXT,
             options: [
                 {text: ''}
             ]
@@ -20,6 +21,17 @@ class EditableQuestion extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleAddOption = this.handleAddOption.bind(this);
         this.handleSave = this.handleSave.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {title, type} = this.state;
+        if (title !== nextProps.question.title || type !== nextProps.question.type) {
+            this.setState({
+                title: nextProps.question.title,
+                type: nextProps.question.type,
+                options: nextProps.question.options
+            });
+        }
     }
 
     handleChange(e) {
@@ -51,9 +63,9 @@ class EditableQuestion extends Component {
     };
 
     handleSave() {
-        const {dispatch} = this.props;
+        const {dispatch, pageId} = this.props;
         const {title, type, options} = this.state;
-        dispatch(questionActions.newQuestion({
+        dispatch(questionActions.createQuestion(pageId, {
             title, type, options
         }));
         this.props.closeModal();
@@ -86,5 +98,9 @@ class EditableQuestion extends Component {
     }
 }
 
-const connectedEditableQuestion = connect()(EditableQuestion);
+const mapStateToProps = (state) => ({
+    question: state.question
+});
+
+const connectedEditableQuestion = connect(mapStateToProps)(EditableQuestion);
 export {connectedEditableQuestion as EditableQuestion};

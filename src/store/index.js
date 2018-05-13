@@ -1,12 +1,21 @@
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import {authentication, forgotPassword, page, questionnaire, questionnaires, registration, resetPassword} from './reducers';
+import {
+    authentication,
+    forgotPassword,
+    page, question,
+    questionnaire,
+    questionnaires,
+    registration,
+    resetPassword
+} from './reducers';
 
 const rootReducer = combineReducers({
     authentication,
     registration,
     forgotPassword,
     resetPassword,
+    question,
     questionnaire,
     questionnaires,
     page,

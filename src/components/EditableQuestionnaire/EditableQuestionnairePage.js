@@ -5,6 +5,7 @@ import {EditableQuestion} from "./Modal";
 import {connect} from "react-redux";
 import {pageActions} from "../../store/actions/page";
 import {questionnaireActions} from "../../store/actions/questionnaire";
+import {questionActions} from "../../store/actions";
 
 
 class EditableQuestionnairePage extends Component {
@@ -31,20 +32,29 @@ class EditableQuestionnairePage extends Component {
 
     handleAddQuestion() {
         this.setState({show: true});
+        const {dispatch} = this.props;
+        const {questionnaireId, pageId} = this.props.match.params;
+        dispatch(questionActions.newQuestion(questionnaireId, pageId));
     }
 
     render() {
+        const {questionnaireId, pageId} = this.props.match.params;
+        const {questions} = this.props;
         return (
             <div>
                 <Button bsStyle="info" style={{marginBottom: '15px'}} onClick={this.handleAddQuestion}>Add
                     question</Button>
-                <EditableQuestionnaireList/>
-                <EditableQuestion show={this.state.show} closeModal={this.handleClose}/>
+                <EditableQuestionnaireList questions={questions}/>
+                <EditableQuestion show={this.state.show} closeModal={this.handleClose} questionnaireId={questionnaireId}
+                                  pageId={pageId}/>
             </div>
         );
     }
 }
 
+const mapStateToProps = (state) => ({
+    questions: state.page.questions
+});
 
-const connectedEditableQuestionnairePage = connect()(EditableQuestionnairePage);
+const connectedEditableQuestionnairePage = connect(mapStateToProps)(EditableQuestionnairePage);
 export {connectedEditableQuestionnairePage as EditableQuestionnairePage};

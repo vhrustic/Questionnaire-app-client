@@ -5,3 +5,4 @@ export * from './reset-password';
 export * from './questionnaire';
 export * from './page';
 export * from './questionnaires';
+export * from './question';

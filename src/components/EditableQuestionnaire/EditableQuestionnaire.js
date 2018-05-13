@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {EditableQuestionnairePage} from './EditableQuestionnairePage';
 import {EditableQuestionnaireFooter} from './EditableQuestionnaireFooter';
 import {EditableQuestionnaireHeader} from './EditableQuestionnaireHeader';
-import {questionnaireActions} from '../../store/actions/questionnaire';
 import {connect} from 'react-redux';
 import {PrivateRoute} from "../PrivateRoute";
 
