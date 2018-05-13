@@ -11,6 +11,11 @@ export function questionnaires(state = initialState, action) {
                 ...state,
                 questionnaires: action.questionnaires
             };
+        case questionnaireConstants.DELETE_QUESTIONNAIRE_SUCCESS:
+            return {
+                ...state,
+                questionnaires: state.questionnaires.filter(questionnaire => questionnaire.id !== action.questionnaireId)
+            };
         default:
             return state;
     }

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import QuestionnaireList from "./QuestionnaireList";
 import {Button} from "react-bootstrap";
 import {questionnaireActions} from "../store/actions/questionnaire";
 import {connect} from "react-redux";
 import {DEFAULT_QUESTIONNAIRE_TITLE} from "../constants";
+import {QuestionnaireList} from "./QuestionnaireList";
 
 class AdminPanel extends Component {
     constructor(props) {
@@ -27,7 +27,7 @@ class AdminPanel extends Component {
             <div>
                 <h3>Questionnaires</h3>
                 <Button bsStyle="primary" onClick={this.handleNewQuestionnaire}>Create new</Button>
-                <QuestionnaireList questionnaires ={questionnaires}/>
+                <QuestionnaireList questionnaires={questionnaires}/>
             </div>
         );
     }

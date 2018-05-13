@@ -16,8 +16,7 @@ const newQuestionnaire = (title) => {
             .then(
                 questionnaire => {
                     dispatch(success(questionnaire));
-                    const page = questionnaire.pages[0].id;
-                    redirectTo(`/edit-questionnaire/${questionnaire.id}/${page}`);
+                    redirectTo(`/edit-questionnaire/${questionnaire.id}`);
                 },
                 error => {
                     dispatch(failure(error.message));
@@ -59,6 +58,8 @@ const loadQuestionnaire = (questionnaireId) => {
             .then(
                 questionnaire => {
                     dispatch(success(questionnaire));
+                    const firstPage = questionnaire.pages[0];
+                    redirectTo(`/edit-questionnaire/${questionnaire.id}/${firstPage.id}`)
                 },
                 error => {
                     dispatch(failure(error.message));
@@ -87,7 +88,24 @@ const updateQuestionnaire = (questionnaireId, questionnaire) => {
     };
 };
 
+const deleteQuestionnaire = (questionnaireId) => {
+    const success = (questionnaireId) => ({
+        type: questionnaireConstants.DELETE_QUESTIONNAIRE_SUCCESS,
+        questionnaireId
+    });
 
+    return dispatch => {
+        questionnaireService.deleteQuestionnaire(questionnaireId)
+            .then(
+                () => {
+                    dispatch(success(questionnaireId));
+                },
+                error => {
+                    // dispatch(failure(error.message));
+                }
+            );
+    };
+};
 
 
 export const questionnaireActions = {
@@ -95,4 +113,5 @@ export const questionnaireActions = {
     loadQuestionnaire,
     loadQuestionnaires,
     updateQuestionnaire,
+    deleteQuestionnaire
 };
