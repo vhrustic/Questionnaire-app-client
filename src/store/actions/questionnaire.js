@@ -44,6 +44,26 @@ const loadQuestionnaires = () => {
     };
 };
 
+const loadUncompletedQuestionnaires = () => {
+    const success = (questionnaires) => ({
+        type: questionnaireConstants.LOAD_UNCOMPLETED_QUESTIONNAIRES,
+        questionnaires
+    });
+
+    return dispatch => {
+        questionnaireService.loadUncompletedQuestionnaires()
+            .then(
+                questionnaires => {
+                    dispatch(success(questionnaires));
+                },
+                error => {
+                    // dispatch(failure(error.message));
+                }
+            );
+    };
+};
+
+
 const loadQuestionnaire = (questionnaireId) => {
     const loadQuestionnaire = (questionnaire) => ({type: questionnaireConstants.LOAD_QUESTIONNAIRE, questionnaire});
     const success = (questionnaire) => ({
@@ -112,6 +132,7 @@ export const questionnaireActions = {
     newQuestionnaire,
     loadQuestionnaire,
     loadQuestionnaires,
+    loadUncompletedQuestionnaires,
     updateQuestionnaire,
     deleteQuestionnaire
 };

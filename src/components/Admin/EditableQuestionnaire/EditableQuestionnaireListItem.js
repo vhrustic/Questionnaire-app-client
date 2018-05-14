@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, ListGroupItem} from "react-bootstrap";
 import {Confirm} from "react-confirm-bootstrap";
-import {questionTypeReadable} from "../../constants";
+import {questionTypeReadable} from "../../../constants/index";
 
 const EditableQuestionnaireListItem = (props) => {
     const {onEditQuestion, onDeleteQuestion, title, type, questionId} = props;

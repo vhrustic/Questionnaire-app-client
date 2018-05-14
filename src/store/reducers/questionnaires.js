@@ -11,6 +11,11 @@ export function questionnaires(state = initialState, action) {
                 ...state,
                 questionnaires: action.questionnaires
             };
+        case questionnaireConstants.LOAD_UNCOMPLETED_QUESTIONNAIRES:
+            return {
+                ...state,
+                questionnaires: action.questionnaires
+            };
         case questionnaireConstants.DELETE_QUESTIONNAIRE_SUCCESS:
             return {
                 ...state,

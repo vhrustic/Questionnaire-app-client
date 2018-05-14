@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {EditableQuestionnaireList} from "./EditableQuestionnaireList";
 import {Button} from "react-bootstrap";
-import {EditableQuestion} from "./Modal";
+import {EditableQuestion} from "./Modal/index";
 import {connect} from "react-redux";
-import {pageActions} from "../../store/actions/page";
-import {questionActions} from "../../store/actions";
+import {pageActions} from "../../../store/actions/page";
+import {questionActions} from "../../../store/actions/index";
 
 
 class EditableQuestionnairePage extends Component {

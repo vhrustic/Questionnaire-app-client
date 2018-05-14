@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Col, Row} from "react-bootstrap";
 import {connect} from "react-redux";
-import {pageActions} from "../../store/actions";
+import {pageActions} from "../../../store/actions/index";
 import {Link} from "react-router-dom/umd/react-router-dom";
 
 class EditableQuestionnaireFooter extends Component {

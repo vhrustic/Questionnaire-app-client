@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {Button, Modal} from "react-bootstrap";
 import {MultipleChoiceQuestion} from "./MultipleChoiceQuestion";
 import {EditableQuestionInfo} from "./EditableQuestionInfo";
-import {questionType} from "../../../constants";
+import {questionType} from "../../../../constants/index";
 import {connect} from "react-redux";
-import {questionActions} from "../../../store/actions";
+import {questionActions} from "../../../../store/actions/index";
 
 
 class EditableQuestion extends Component {

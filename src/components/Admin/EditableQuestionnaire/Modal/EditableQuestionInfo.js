@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {ControlLabel, FormControl, FormGroup} from 'react-bootstrap';
-import {questionType, questionTypeReadable} from '../../../constants';
+import {questionType, questionTypeReadable} from '../../../../constants/index';
 
 class EditableQuestionInfo extends Component {
     constructor(props) {

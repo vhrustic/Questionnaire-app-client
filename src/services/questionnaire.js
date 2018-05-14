@@ -14,6 +14,20 @@ const loadQuestionnaires = () => {
         });
 };
 
+const loadUncompletedQuestionnaires = () => {
+    const requestOptions = getRequestOptionsWithAuth(HTTP_GET);
+    return fetch(`/questionnaires/uncompleted/all`, requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then((resp) => {
+                    throw new Error(resp.message);
+                });
+            }
+            return response.json();
+        });
+};
+
+
 const loadQuestionnaire = (questionnaireId) => {
     const requestOptions = getRequestOptionsWithAuth(HTTP_GET);
     return fetch(`/questionnaires/${questionnaireId}`, requestOptions)
@@ -70,6 +84,7 @@ export const questionnaireService = {
     createQuestionnaire,
     loadQuestionnaire,
     loadQuestionnaires,
+    loadUncompletedQuestionnaires,
     deleteQuestionnaire,
     updateQuestionnaire
 };

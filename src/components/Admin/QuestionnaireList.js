@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Button, ButtonGroup, Table} from "react-bootstrap";
-import {humanReadableDateTime} from './../helpers';
+import {humanReadableDateTime} from '../../helpers/index';
 import {Confirm} from "react-confirm-bootstrap";
 import {connect} from "react-redux";
-import {questionnaireActions} from "../store/actions";
+import {questionnaireActions} from "../../store/actions/index";
 
 class QuestionnaireList extends Component {
     constructor(props) {

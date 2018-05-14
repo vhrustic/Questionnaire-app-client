@@ -3,8 +3,8 @@ import {EditableQuestionnairePage} from './EditableQuestionnairePage';
 import {EditableQuestionnaireFooter} from './EditableQuestionnaireFooter';
 import {EditableQuestionnaireHeader} from './EditableQuestionnaireHeader';
 import {connect} from 'react-redux';
-import {PrivateRoute} from "../PrivateRoute";
-import {questionnaireActions} from "../../store/actions/questionnaire";
+import {PrivateRoute} from "../../PrivateRoute";
+import {questionnaireActions} from "../../../store/actions/questionnaire";
 
 class EditableQuestionnaire extends Component {
     constructor(props) {

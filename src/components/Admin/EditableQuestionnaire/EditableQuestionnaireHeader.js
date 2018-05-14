@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, ControlLabel, FormControl, FormGroup} from "react-bootstrap";
-import {questionnaireActions} from "../../store/actions/questionnaire";
+import {questionnaireActions} from "../../../store/actions/questionnaire";
 import {connect} from "react-redux";
 
 class EditableQuestionnaireHeader extends Component {

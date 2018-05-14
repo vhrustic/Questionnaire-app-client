@@ -12,8 +12,8 @@ import {
     ResetPassword,
     AppNavbar,
     EditableQuestionnaire,
-    EditableQuestionnairePage
 } from './components';
+import {Dashboard} from "./components/Questionnaire";
 
 class App extends Component {
     render() {
@@ -22,13 +22,15 @@ class App extends Component {
                 <AppNavbar/>
                 <Row className="container">
                     <Router history={history}>
-                        <Col mdOffset={1} md={10}>
+                        <Col mdOffset={2} md={10}>
                             <PrivateRoute exac path="/admin" roles={['admin']} component={AdminPanel}/>
                             <Route exact path="/login" component={Login}/>
                             <Route exact path="/register" component={Register}/>
                             <Route exact path="/forgot-password" component={ForgotPassword}/>
                             <Route path="/reset-password" component={ResetPassword}/>
-                            <PrivateRoute roles={['admin']} path="/edit-questionnaire/:questionnaireId" component={EditableQuestionnaire}/>
+                            <PrivateRoute roles={['admin']} path="/edit-questionnaire/:questionnaireId"
+                                          component={EditableQuestionnaire}/>
+                            <PrivateRoute roles={['user']} path="/dashboard" component={Dashboard}/>
                         </Col>
                     </Router>
                 </Row>

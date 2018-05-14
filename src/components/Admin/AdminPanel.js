@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Button} from "react-bootstrap";
-import {questionnaireActions} from "../store/actions/questionnaire";
+import {questionnaireActions} from "../../store/actions/questionnaire";
 import {connect} from "react-redux";
-import {DEFAULT_QUESTIONNAIRE_TITLE} from "../constants";
+import {DEFAULT_QUESTIONNAIRE_TITLE} from "../../constants/index";
 import {QuestionnaireList} from "./QuestionnaireList";
 
 class AdminPanel extends Component {
