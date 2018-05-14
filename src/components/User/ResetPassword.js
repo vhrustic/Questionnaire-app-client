@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {Alert, Button, Col, ControlLabel, FormControl, FormGroup} from 'react-bootstrap'
 import {userActions} from '../../store/actions/index';
 import {Link} from 'react-router-dom';
-import queryString from 'query-string';
 
 class ResetPassword extends Component {
     constructor(props) {
@@ -28,7 +27,9 @@ class ResetPassword extends Component {
         const {password, confirmPassword} = this.state;
         const {dispatch} = this.props;
         if (password && confirmPassword) {
-            const token = queryString.parse(this.props.location.search).token;
+            const search = this.props.location.search;
+            const params = new URLSearchParams(search);
+            const token = params.get('token');
             dispatch(userActions.resetPassword(token, password));
         }
     }
