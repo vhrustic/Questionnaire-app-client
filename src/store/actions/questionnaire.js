@@ -165,6 +165,14 @@ const setActivePage = (pageId) => {
     }
 };
 
+const updateQuestionnaireAnswers = (pageId, questions) => {
+    return {
+        type: questionnaireConstants.UPDATE_QUESTIONNAIRE_PAGE_ANSWERS,
+        pageId: pageId,
+        questions
+    };
+};
+
 
 export const questionnaireActions = {
     newQuestionnaire,
@@ -174,5 +182,6 @@ export const questionnaireActions = {
     loadUncompletedQuestionnaire,
     updateQuestionnaire,
     deleteQuestionnaire,
+    updateQuestionnaireAnswers,
     setActivePage
 };

@@ -9,15 +9,15 @@ class QuestionnaireFooter extends Component {
     }
 
     render() {
-        const {previousPage, nextPage, questionnaireId} = this.props;
+        const {previousPage, nextPage, questionnaireId, onChangePage} = this.props;
         return (
             <Row>
                 <Col sm={8} style={{marginTop: '5px'}} align="center">
-                    {previousPage > 0 && <Link to={`/questionnaire/${questionnaireId}/${previousPage}`}>Previous
-                        page</Link>}<span> {previousPage > 0 && nextPage > 0 && ' | '} </span>
-                    {nextPage > 0 && <Link to={`/questionnaire/${questionnaireId}/${nextPage}`}>Next page</Link>}
+                    {previousPage > 0 && <Button onClick={onChangePage(questionnaireId, previousPage)}>Previous
+                        page</Button>}<span> {previousPage > 0 && nextPage > 0 && ' | '} </span>
+                    {nextPage > 0 &&
+                    <Button onClick={onChangePage(questionnaireId, nextPage)}>Next page</Button>}
                 </Col>
-                {nextPage < 0 && <Button bsStyle="success">Submit answers</Button>}
             </Row>
         );
     }

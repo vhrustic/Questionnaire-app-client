@@ -5,3 +5,4 @@ export * from './redirect';
 export * from './http-request';
 export * from './datetime';
 export * from './page-navigation';
+export * from './question';
