@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Col, FormControl, Glyphicon, Row} from "react-bootstrap";
 
-class MultipleChoiceQuestion extends Component {
+class EditableMultipleChoiceQuestion extends Component {
     constructor(props) {
         super(props);
     }
@@ -30,5 +30,5 @@ class MultipleChoiceQuestion extends Component {
     }
 }
 
-export {MultipleChoiceQuestion};
+export {EditableMultipleChoiceQuestion};
 

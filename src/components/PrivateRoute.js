@@ -14,6 +14,6 @@ export const PrivateRoute = ({component: Component, ...rest}) => {
         if (!isAuthorised) {
             return <Redirect to={{pathname: '/unauthorized', state: {from: props.location}}}/>;
         }
-        return <Component {...props} />;
+        return <Component {...props} {...rest} />;
     }}/>)
 };

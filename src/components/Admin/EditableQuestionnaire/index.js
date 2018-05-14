@@ -4,4 +4,4 @@ export * from './EditableQuestionnaireFooter';
 export * from './EditableQuestionnaireHeader';
 export * from './EditableQuestionnaireList';
 export * from './EditableQuestionnaireListItem';
-export * from './Modal/index';
+export * from './Modal';

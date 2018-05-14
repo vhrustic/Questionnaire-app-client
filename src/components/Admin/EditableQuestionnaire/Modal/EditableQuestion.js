@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Modal} from "react-bootstrap";
-import {MultipleChoiceQuestion} from "./MultipleChoiceQuestion";
+import {EditableMultipleChoiceQuestion} from "./EditableMultipleChoiceQuestion";
 import {EditableQuestionInfo} from "./EditableQuestionInfo";
 import {questionType} from "../../../../constants/index";
 import {connect} from "react-redux";
@@ -91,10 +91,10 @@ class EditableQuestion extends Component {
                     <Modal.Body>
                         <EditableQuestionInfo title={title} type={type} onChangeHandler={this.handleChange}/>
                         {(type === questionType.SINGLE_CHOICE || type === questionType.MULTIPLE_CHOICE) &&
-                        <MultipleChoiceQuestion options={options}
-                                                onAddHandler={this.handleAddOption}
-                                                onRemoveHandler={this.handleRemoveOption}
-                                                onChangeHandler={this.handleOptionChange}/>}
+                        <EditableMultipleChoiceQuestion options={options}
+                                                        onAddHandler={this.handleAddOption}
+                                                        onRemoveHandler={this.handleRemoveOption}
+                                                        onChangeHandler={this.handleOptionChange}/>}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button bsStyle="success" onClick={this.handleSave}>Save</Button>

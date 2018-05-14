@@ -24,7 +24,7 @@ class Questionnaires extends Component {
                     <td>{questionnaire.title}</td>
                     <td>{humanReadableDateTime(questionnaire.createdAt)}</td>
                     <td><Button bsSize="xsmall" bsStyle="primary"
-                                href={`/questionnaires/${questionnaire.id}`}>Open</Button></td>
+                                href={`/questionnaire/${questionnaire.id}`}>Open</Button></td>
                 </tr>))}
                 </tbody>
             </Table>

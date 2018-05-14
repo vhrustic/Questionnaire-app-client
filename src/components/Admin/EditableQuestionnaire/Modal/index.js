@@ -1,3 +1,3 @@
 export * from './EditableQuestion';
-export * from './MultipleChoiceQuestion';
+export * from './EditableMultipleChoiceQuestion';
 export * from './EditableQuestionInfo';

@@ -1,6 +1,6 @@
 import {questionnaireConstants} from "../../constants";
 import {questionnaireService} from "../../services";
-import {redirectTo} from "../../helpers";
+import {getNextPageId, getPreviousPageId, redirectTo} from "../../helpers";
 
 const newQuestionnaire = (title) => {
     const createNewQuestionnaire = (title) => ({type: questionnaireConstants.CREATE_NEW_QUESTIONNAIRE, title});
@@ -88,6 +88,29 @@ const loadQuestionnaire = (questionnaireId) => {
     };
 };
 
+const loadUncompletedQuestionnaire = (questionnaireId) => {
+    const success = (questionnaire) => ({
+        type: questionnaireConstants.LOAD_UNCOMPLETED_QUESTIONNAIRE,
+        questionnaire
+    });
+
+    return dispatch => {
+        questionnaireService.loadUncompletedQuestionnaire(questionnaireId)
+            .then(
+                questionnaire => {
+                    const firstPage = questionnaire.pages[0];
+                    questionnaire.activePage = firstPage.id;
+                    questionnaire.nextPage = questionnaire.pages[1] ? questionnaire.pages[1].id : 0;
+                    dispatch(success(questionnaire));
+                    redirectTo(`/questionnaire/${questionnaire.id}/${firstPage.id}`)
+                },
+                error => {
+                    // dispatch(failure(error.message));
+                }
+            );
+    };
+};
+
 
 const updateQuestionnaire = (questionnaireId, questionnaire) => {
     const success = (questionnaire) => ({
@@ -127,12 +150,29 @@ const deleteQuestionnaire = (questionnaireId) => {
     };
 };
 
+const setActivePage = (pageId) => {
+    const success = (previousPage, nextPage) => ({
+        type: questionnaireConstants.SET_ACTIVE_PAGE,
+        activePage: pageId,
+        previousPage, nextPage
+    });
+
+    return (dispatch, getState) => {
+        const pages = getState().questionnaire.pages;
+        const nextPage = getNextPageId(pages, pageId);
+        const previousPage = getPreviousPageId(pages, pageId);
+        dispatch(success(previousPage, nextPage));
+    }
+};
+
 
 export const questionnaireActions = {
     newQuestionnaire,
     loadQuestionnaire,
     loadQuestionnaires,
     loadUncompletedQuestionnaires,
+    loadUncompletedQuestionnaire,
     updateQuestionnaire,
-    deleteQuestionnaire
+    deleteQuestionnaire,
+    setActivePage
 };

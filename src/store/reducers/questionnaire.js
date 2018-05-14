@@ -2,7 +2,10 @@ import {questionConstants, questionnaireConstants} from "../../constants";
 
 const initialState = {
     title: '',
-    pages: []
+    pages: [],
+    activePage: 0,
+    previousPage: 0,
+    nextPage: 0
 };
 
 export function questionnaire(state = initialState, action) {
@@ -32,6 +35,18 @@ export function questionnaire(state = initialState, action) {
             return {
                 ...state,
                 ...action.questionnaire
+            };
+        case questionnaireConstants.LOAD_UNCOMPLETED_QUESTIONNAIRE:
+            return {
+                ...state,
+                ...action.questionnaire
+            };
+        case questionnaireConstants.SET_ACTIVE_PAGE:
+            return {
+                ...state,
+                activePage: action.activePage,
+                previousPage: action.previousPage,
+                nextPage: action.nextPage
             };
         default:
             return state;

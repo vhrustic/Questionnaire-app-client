@@ -27,10 +27,22 @@ const loadUncompletedQuestionnaires = () => {
         });
 };
 
-
 const loadQuestionnaire = (questionnaireId) => {
     const requestOptions = getRequestOptionsWithAuth(HTTP_GET);
     return fetch(`/questionnaires/${questionnaireId}`, requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then((resp) => {
+                    throw new Error(resp.message);
+                });
+            }
+            return response.json();
+        });
+};
+
+const loadUncompletedQuestionnaire = (questionnaireId) => {
+    const requestOptions = getRequestOptionsWithAuth(HTTP_GET);
+    return fetch(`/questionnaires/uncompleted/${questionnaireId}`, requestOptions)
         .then(response => {
             if (!response.ok) {
                 return response.json().then((resp) => {
@@ -85,6 +97,7 @@ export const questionnaireService = {
     loadQuestionnaire,
     loadQuestionnaires,
     loadUncompletedQuestionnaires,
+    loadUncompletedQuestionnaire,
     deleteQuestionnaire,
     updateQuestionnaire
 };
