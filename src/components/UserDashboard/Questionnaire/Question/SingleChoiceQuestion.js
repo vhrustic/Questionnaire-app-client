@@ -7,7 +7,7 @@ const SingleChoiceQuestion = (props) => {
         <FormGroup controlId={`singlechoice-${question.id}`}>
             <ControlLabel>{`${number}. `}{question.title}</ControlLabel>
             {question.options.map(opt => (
-                <Radio value={opt.id} key={opt.id} name={`radiogroup${number}`} checked={opt.selected}
+                <Radio value={opt.id} key={opt.id} name={`radiogroup${number}`} checked={!!opt.selected}
                        onChange={onChange(question, opt.id)}>{opt.text}</Radio>))}
         </FormGroup>
     );

@@ -71,14 +71,16 @@ class QuestionnairePage extends Component {
     }
 
     handleSubmit() {
-        console.log(this.state);
+        const {pageId} = this.props.match.params;
+        const {dispatch} = this.props;
+        dispatch(questionnaireActions.updateQuestionnaireAnswers(pageId, this.state.questions));
+        dispatch(questionnaireActions.submitAnswers());
     }
 
     handleChangePage = (questionnaireId, newPageId) => {
         return () => {
             const {dispatch} = this.props;
             const {pageId} = this.props.match.params;
-            console.log(this.state.questions);
             dispatch(questionnaireActions.updateQuestionnaireAnswers(pageId, this.state.questions));
             redirectTo(`/questionnaire/${questionnaireId}/${newPageId}`);
         };
@@ -111,7 +113,7 @@ class QuestionnairePage extends Component {
                         }
                         return renderQuestion;
                     })}
-                    {nextPage > 0 && <Button bsStyle="success" onClick={this.handleSubmit}>Submit answers</Button>}
+                    {nextPage < 0 && <Button bsStyle="success" onClick={this.handleSubmit}>Submit answers</Button>}
                 </form>
 
                 <QuestionnaireFooter questionnaireId={questionnaireId} onChangePage={this.handleChangePage}/>

@@ -6,7 +6,7 @@ const YesNoQuestion = (props) => {
     return (
         <FormGroup controlId={`yesno-${question.id}`}>
             <ControlLabel>{`${number}. `}{question.title}</ControlLabel>
-            {question.options.map(opt => (<Radio key={opt.id} name={`yesno${number}`} checked={opt.selected} onChange={onChange(question, opt.id)}>{opt.text}</Radio>))}
+            {question.options.map(opt => (<Radio value={opt.id} key={opt.id} name={`yesno${number}`} checked={!!opt.selected} onChange={onChange(question, opt.id)}>{opt.text}</Radio>))}
         </FormGroup>
     );
 };

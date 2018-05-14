@@ -48,21 +48,25 @@ export function questionnaire(state = initialState, action) {
                 previousPage: action.previousPage,
                 nextPage: action.nextPage
             };
+        case questionnaireConstants.SUBMIT_ANSWERS_SUCCESS:
+            return {
+                ...initialState
+            };
         case questionnaireConstants.UPDATE_QUESTIONNAIRE_PAGE_ANSWERS:
             const newPages = state.pages.map(page => {
                 if (page.id !== parseInt(action.pageId, 10)) {
-                   return page;
+                    return page;
                 }
                 const newQuestions = action.questions.map(question => {
-                   const newOptions = question.options.map(opt => {
-                      return {
-                          ...opt
-                      }
-                   });
-                   return {
-                       ...question,
-                       options: newOptions
-                   };
+                    const newOptions = question.options.map(opt => {
+                        return {
+                            ...opt
+                        }
+                    });
+                    return {
+                        ...question,
+                        options: newOptions
+                    };
                 });
                 return {
                     ...page,

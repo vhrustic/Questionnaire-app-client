@@ -1,6 +1,6 @@
 import {questionnaireConstants} from "../../constants";
-import {questionnaireService} from "../../services";
-import {getNextPageId, getPreviousPageId, redirectTo} from "../../helpers";
+import {answerService, questionnaireService} from "../../services";
+import {getNextPageId, getPreviousPageId, prepareAnswersArray, redirectTo} from "../../helpers";
 
 const newQuestionnaire = (title) => {
     const createNewQuestionnaire = (title) => ({type: questionnaireConstants.CREATE_NEW_QUESTIONNAIRE, title});
@@ -174,6 +174,28 @@ const updateQuestionnaireAnswers = (pageId, questions) => {
 };
 
 
+const submitAnswers = () => {
+    const success = () => ({
+        type: questionnaireConstants.SUBMIT_ANSWERS_SUCCESS
+    });
+
+    return (dispatch, getState) => {
+        const pages = getState().questionnaire.pages;
+        const answers = prepareAnswersArray(pages);
+        answerService.saveAnswers(answers)
+            .then(
+                () => {
+                    dispatch(success());
+                    redirectTo('/dashboard');
+                },
+                error => {
+                    // dispatch(failure(error.message));
+                }
+            );
+    };
+};
+
+
 export const questionnaireActions = {
     newQuestionnaire,
     loadQuestionnaire,
@@ -183,5 +205,6 @@ export const questionnaireActions = {
     updateQuestionnaire,
     deleteQuestionnaire,
     updateQuestionnaireAnswers,
+    submitAnswers,
     setActivePage
 };
