@@ -1,7 +1,7 @@
-##Questionnaire application client project
+## Questionnaire application client project
 Client side for questionnaire app which allow users to create questionnaires with 4 type of questions(Text, Yes-No, Single Choice and Multiple choice). Project is developed using ReactJs along with Redux library.
 
-####Quick overview
+#### Quick overview
 
 Running project:
 * Set environment variable `HTTPS=true` before running start command
