@@ -3,23 +3,20 @@ import {connect} from 'react-redux';
 import {Button, Col, ControlLabel, FormControl, FormGroup} from 'react-bootstrap'
 import {userActions} from "../../store/actions/index";
 import {Link} from "react-router-dom";
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
 
 class Login extends Component {
     constructor(props) {
         super(props);
-
-        // reset login status
-        // this.props.dispatch(userActions.logout());
-
         this.state = {
             email: '',
-            password: '',
-            submitted: false
+            password: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.responseFacebook = this.responseFacebook.bind(this);
     }
 
     handleChange(e) {
@@ -38,9 +35,13 @@ class Login extends Component {
         }
     }
 
+    responseFacebook(params) {
+        const {dispatch} = this.props;
+        dispatch(userActions.fbLogin(params.accessToken));
+    }
+
     render() {
-        const {loggingIn} = this.props;
-        const {email, password, submitted} = this.state;
+        const {email, password} = this.state;
         return (
             <Col md={8} mdOffset={2}>
                 <h2>Login</h2>
@@ -55,8 +56,18 @@ class Login extends Component {
                         <FormControl type="password" name="password" value={password} onChange={this.handleChange}/>
                     </FormGroup>
 
+
                     <FormGroup>
-                        <Button type="submit" bsStyle="primary">Login</Button>
+                        <Button type="submit" bsStyle="success" style={{marginRight: '10px'}}>Login</Button>
+                        <FacebookLogin
+                            appId="356869268168181"
+                            autoLoad={false}
+                            fields="name,email"
+                            callback={this.responseFacebook}
+                            render={renderProps => (
+                                <Button bsStyle="primary" onClick={renderProps.onClick}>Login with Facebook</Button>
+                            )}
+                        />
                         <Link to='/forgot-password' className="pull-right">Forgot password</Link>
                     </FormGroup>
                 </form>
@@ -65,12 +76,5 @@ class Login extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    const {loggingIn} = state.authentication;
-    return {
-        loggingIn
-    };
-}
-
-const connectedLogin = connect(mapStateToProps)(Login);
+const connectedLogin = connect()(Login);
 export {connectedLogin as Login};

@@ -1,11 +1,28 @@
 import {userAuthConstants} from "../constants";
 import {loginHeader} from "../helpers";
 
-export const userService = {
-    login,
-    register,
-    forgotPassword,
-    resetPassword
+const fbLogin = (accessToken) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    };
+
+    return fetch(`/auth/facebook/token?access_token=${accessToken}`, requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                return Promise.reject(response.statusText);
+            }
+            return response.json();
+        })
+        .then(user => {
+            if (user && user.token) {
+                localStorage.setItem(userAuthConstants.LOCAL_STORAGE_USER_KEY, JSON.stringify(user));
+            }
+            return user;
+        });
 };
 
 function login(email, password) {
@@ -58,7 +75,7 @@ function register(fullName, email, password) {
             }
             return user;
         });
-};
+}
 
 function forgotPassword(email) {
     const requestOptions = {
@@ -101,3 +118,11 @@ function resetPassword(token, password) {
             return response.json();
         });
 }
+
+export const userService = {
+    login,
+    fbLogin,
+    register,
+    forgotPassword,
+    resetPassword
+};

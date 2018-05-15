@@ -2,43 +2,65 @@ import {userConstants} from './../../constants';
 import {history} from './../../helpers';
 import {userService} from "../../services";
 
-export const userActions = {
-    login,
-    register,
-    forgotPassword,
-    resetPassword
+const loginSuccess = (user) => {
+    return {type: userConstants.LOGIN_SUCCESS, user}
 };
 
-function login(email, password) {
+const fbLogin = (accessToken) => {
+    return dispatch => {
+        userService.fbLogin(accessToken)
+            .then(
+                user => {
+                    dispatch(loginSuccess(user));
+                    history.push('/dashboard');
+                },
+                error => {
+                }
+            );
+    };
+};
+
+const login = (email, password) => {
+    const request = (user) => {
+        return {type: userConstants.LOGIN_REQUEST, user}
+    };
+
+    const failure = (error) => {
+        return {type: userConstants.LOGIN_FAILURE, error}
+    };
+
     return dispatch => {
         dispatch(request({email}));
 
         userService.login(email, password)
             .then(
                 user => {
-                    dispatch(success(user));
-                    history.push('/');
+                    dispatch(loginSuccess(user));
+                    if (user.user.role === 'admin') {
+                        history.push('/admin');
+                    } else {
+                        history.push('/dashboard');
+                    }
                 },
                 error => {
                     dispatch(failure(error));
                 }
             );
     };
+};
 
-    function request(user) {
-        return {type: userConstants.LOGIN_REQUEST, user}
-    }
+const register = (fullName, email, password) => {
+    const request = (user) => {
+        return {type: userConstants.REGISTER_REQUEST, user}
+    };
 
-    function success(user) {
-        return {type: userConstants.LOGIN_SUCCESS, user}
-    }
+    const success = (user) => {
+        return {type: userConstants.REGISTER_SUCCESS, user}
+    };
 
-    function failure(error) {
-        return {type: userConstants.LOGIN_FAILURE, error}
-    }
-}
-
-function register(fullName, email, password) {
+    const failure = (error) => {
+        return {type: userConstants.REGISTER_FAILURE, error}
+    };
     return dispatch => {
         dispatch(request({fullName, email, password}));
 
@@ -46,29 +68,29 @@ function register(fullName, email, password) {
             .then(
                 user => {
                     dispatch(success(user));
-                    history.push('/');
+                    history.push('/dashboard');
                 },
                 error => {
                     dispatch(failure(error));
                 }
             );
     };
-
-    function request(user) {
-        return {type: userConstants.REGISTER_REQUEST, user}
-    }
-
-    function success(user) {
-        return {type: userConstants.REGISTER_SUCCESS, user}
-    }
-
-    function failure(error) {
-        return {type: userConstants.REGISTER_FAILURE, error}
-    }
-}
+};
 
 
-function forgotPassword(email) {
+const forgotPassword = (email) => {
+    const request = (email) => {
+        return {type: userConstants.FORGOT_PASSWORD_REQUEST, email}
+    };
+
+    const success = (message) => {
+        return {type: userConstants.FORGOT_PASSWORD_SUCCESS, message}
+    };
+
+    const failure = (message) => {
+        return {type: userConstants.FORGOT_PASSWORD_FAILURE, message}
+    };
+
     return dispatch => {
         dispatch(request({email}));
 
@@ -81,25 +103,18 @@ function forgotPassword(email) {
             dispatch(failure(err.message));
         });
     };
-
-    function request(email) {
-        return {type: userConstants.FORGOT_PASSWORD_REQUEST, email}
-    }
-
-    function success(message) {
-        return {type: userConstants.FORGOT_PASSWORD_SUCCESS, message}
-    }
-
-    function failure(message) {
-        return {type: userConstants.FORGOT_PASSWORD_FAILURE, message}
-    }
-}
+};
 
 
-function resetPassword(token, password) {
+const resetPassword = (token, password) => {
+    const success = (message) => {
+        return {type: userConstants.UPDATE_PASSWORD_SUCCESS, message}
+    };
+
+    const failure = (message) => {
+        return {type: userConstants.UPDATE_PASSWORD_FAILURE, message}
+    };
     return dispatch => {
-        dispatch(request());
-
         userService.resetPassword(token, password)
             .then(
                 response => {
@@ -109,17 +124,23 @@ function resetPassword(token, password) {
             dispatch(failure(err.message));
         });
     };
+};
 
-    function request(email) {
-        return {type: userConstants.UPDATE_PASSWORD_REQUEST}
-    }
+const logout = () => {
+    localStorage.removeItem('user');
+    return {
+        type: userConstants.LOGOUT
+    };
+};
 
-    function success(message) {
-        return {type: userConstants.UPDATE_PASSWORD_SUCCESS, message}
-    }
+export const userActions = {
+    login,
+    fbLogin,
+    register,
+    forgotPassword,
+    resetPassword,
+    logout,
+    loginSuccess
+};
 
-    function failure(message) {
-        return {type: userConstants.UPDATE_PASSWORD_FAILURE, message}
-    }
-}
 
