@@ -1,4 +1,4 @@
-import {pageConstants, questionConstants, questionnaireConstants} from "../../constants";
+import {pageConstants, questionConstants} from "../../constants";
 
 const initialState = {
     questions: []

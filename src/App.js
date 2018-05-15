@@ -13,7 +13,7 @@ import {
     AppNavbar,
     EditableQuestionnaire,
     Questionnaire,
-    Dashboard
+    Dashboard, Homepage
 } from './components';
 
 
@@ -27,8 +27,9 @@ class App extends Component {
                         <Col mdOffset={1} md={10}>
                             <Router history={history}>
                                 <div>
+                                    <Route exact={true} path="/" component={Homepage}/>
                                     <PrivateRoute exac path="/admin" roles={['admin']}
-                                                                         component={AdminPanel}/>
+                                                  component={AdminPanel}/>
                                     <PrivateRoute roles={['user']} path="/dashboard" component={Dashboard}/>
                                     <Route exact path="/login" component={Login}/>
                                     <Route exact path="/register" component={Register}/>
@@ -48,4 +49,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export {App};

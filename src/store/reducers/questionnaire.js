@@ -1,4 +1,4 @@
-import {questionConstants, questionnaireConstants} from "../../constants";
+import {questionnaireConstants} from "../../constants";
 
 const initialState = {
     title: '',

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Col, Row} from "react-bootstrap";
 import {connect} from "react-redux";
-import {pageActions, questionnaireActions} from "../../../store/actions/index";
+import {pageActions} from "../../../store/actions/index";
 import {Link} from "react-router-dom/umd/react-router-dom";
 import {redirectTo} from "../../../helpers";
 

@@ -4,10 +4,6 @@ import {connect} from "react-redux";
 import {Questionnaires} from "./Questionnaires";
 
 class Dashboard extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         const {dispatch} = this.props;
         dispatch(questionnaireActions.loadUncompletedQuestionnaires());

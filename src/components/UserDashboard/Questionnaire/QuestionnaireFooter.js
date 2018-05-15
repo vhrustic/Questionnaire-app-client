@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
 import {Button, Col, Row} from "react-bootstrap";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom/umd/react-router-dom";
 
 class QuestionnaireFooter extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const {previousPage, nextPage, questionnaireId, onChangePage} = this.props;
         return (

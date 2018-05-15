@@ -3,10 +3,6 @@ import {ControlLabel, FormControl, FormGroup} from 'react-bootstrap';
 import {questionType, questionTypeReadable} from '../../../../constants/index';
 
 class EditableQuestionInfo extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const {onChangeHandler, type, title} = this.props;
         const questionTypes = Object.keys(questionType);

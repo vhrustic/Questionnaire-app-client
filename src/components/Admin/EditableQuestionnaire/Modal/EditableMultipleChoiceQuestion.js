@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import {Button, Col, FormControl, Glyphicon, Row} from "react-bootstrap";
 
 class EditableMultipleChoiceQuestion extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const {onAddHandler, onRemoveHandler, onChangeHandler, options} = this.props;
         return (

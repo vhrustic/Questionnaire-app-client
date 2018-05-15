@@ -25,14 +25,13 @@ class AppNavbar extends Component {
     }
 
     render() {
-        const {userObj} = this.props;
-        const isLogged = Boolean(userObj.user.token);
-        const homepageUrl = userObj.user.role === 'admin' ? '/admin' : '/dashboard';
+        const userObj = this.props.userObj.user;
+        const isLogged = Boolean(userObj.token);
         return (
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href={homepageUrl}>Questionnaire App</a>
+                        <a href="/">Questionnaire App</a>
                     </Navbar.Brand>
                     <Navbar.Toggle/>
                 </Navbar.Header>

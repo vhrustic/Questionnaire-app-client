@@ -6,10 +6,6 @@ import {questionnaireActions} from "../../../store/actions/questionnaire";
 import {PrivateRoute} from "../../PrivateRoute";
 
 class Questionnaire extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         const {dispatch} = this.props;
         const {questionnaireId} = this.props.match.params;

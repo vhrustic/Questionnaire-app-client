@@ -8,10 +8,12 @@ export function authentication(state = initialState, action) {
     switch (action.type) {
         case userConstants.LOGIN_REQUEST:
             return {
+                ...state,
                 user: action.user
             };
         case userConstants.LOGIN_SUCCESS:
             return {
+                ...state,
                 user: action.user
             };
         case userConstants.LOGIN_FAILURE:
