@@ -11,16 +11,6 @@ class Homepage extends Component {
         return (
           <div>
             <PageHeader>Welcome to questionnaire app!</PageHeader>
-            {!isLogged && (
-              <Button
-                bsStyle="primary"
-                onClick={() => {
-                  redirectTo("/register");
-                }}
-              >
-                Register
-              </Button>
-            )}
 
             {!isLogged && (
               <Button
