@@ -8,10 +8,9 @@ export const questionConstants = {
 };
 
 export const questionType = {
-    TEXT: 'TEXT',
-    YES_NO: 'YES_NO',
-    MULTIPLE_CHOICE: 'MULTIPLE_CHOICE',
-    SINGLE_CHOICE: 'SINGLE_CHOICE'
+  TEXT: "TEXT",
+  MULTIPLE_CHOICE: "MULTIPLE_CHOICE",
+  SINGLE_CHOICE: "SINGLE_CHOICE",
 };
 
 export const questionTypeReadable = {

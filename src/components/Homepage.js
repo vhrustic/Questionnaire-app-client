@@ -9,22 +9,40 @@ class Homepage extends Component {
         const isLogged = Boolean(userObj.token);
         const userRole = userObj.user.role;
         return (
-            <div>
-                <PageHeader>Welcome to questionnaire app!</PageHeader>
-                {!isLogged && <Button bsStyle="primary" onClick={() => {
-                    redirectTo('/register')
-                }}>Register</Button>}
-                {!isLogged && <span> or </span>}
-                {!isLogged && <Button bsStyle="primary" onClick={() => {
-                    redirectTo('/login')
-                }}>Login</Button>}
-                {userRole === 'admin' && <Button bsStyle="success" onClick={() => {
-                    redirectTo('/admin')
-                }}>Admin panel</Button>}
-                {userRole === 'user' && <Button bsStyle="success" onClick={() => {
-                    redirectTo('/dashboard')
-                }}>User dashboard</Button>}
-            </div>
+          <div>
+            <PageHeader>Welcome to questionnaire app!</PageHeader>
+
+            {!isLogged && (
+              <Button
+                bsStyle="primary"
+                onClick={() => {
+                  redirectTo("/login");
+                }}
+              >
+                Login
+              </Button>
+            )}
+            {userRole === "admin" && (
+              <Button
+                bsStyle="success"
+                onClick={() => {
+                  redirectTo("/admin");
+                }}
+              >
+                Admin panel
+              </Button>
+            )}
+            {userRole === "user" && (
+              <Button
+                bsStyle="success"
+                onClick={() => {
+                  redirectTo("/dashboard");
+                }}
+              >
+                User dashboard
+              </Button>
+            )}
+          </div>
         );
     }
 }
